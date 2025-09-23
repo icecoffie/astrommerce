@@ -1,40 +1,28 @@
-# LabShare
+# HPZ TDR – Komunitas Motor Indonesia
 
-**LabShare** adalah sebuah aplikasi e-commerce yang dirancang untuk menunjang aktivitas penjualan di lingkungan Universitas Pamulang. Aplikasi ini dikelola oleh Program Studi Ekonomi Syariah dan dikembangkan oleh tim mahasiswa dari Program Studi Teknik Informatika Universitas Pamulang.
-
-Tujuan utama dari aplikasi ini adalah untuk memfasilitasi proses jual beli barang di kampus Universitas Pamulang secara efisien dan terorganisir, dengan pendekatan berbasis teknologi yang sesuai dengan prinsip ekonomi syariah.
+**HPZ TDR** adalah sebuah platform komunitas motor eksklusif yang dirancang untuk mempertemukan para rider, pecinta otomotif, dan penggemar motor sport di Indonesia.  
+Bersama **HPZ Crew**, komunitas ini menghadirkan challenge interaktif, leaderboard, event otomotif, dan reward menarik yang mendukung semangat kebersamaan serta prestasi di dunia motor Indonesia.
 
 ---
 
 ## ✨ Fitur Utama
 
--   Manajemen Produk
--   Halaman Detail Produk
--   Proses Checkout & Pembayaran
--   Autentikasi & Manajemen Pengguna
--   Dashboard Admin
+-   Registrasi & Autentikasi Pengguna
+-   Challenge Mingguan & Bulanan
+-   Leaderboard dengan Sistem Poin
+-   Upload Konten & Sharing Hasil
+-   Reward & Event Otomotif Eksklusif
+-   Dashboard Komunitas Interaktif
 
 ---
 
-## 👨‍💻 Tim Pengembang
-
--   **Dhamar Putra Pangestu**  
-    <em>Fullstack Developer · Backend Team Head · DevOps · Project Manager</em>
-
--   **Muchtar Ali Anwar**  
-    <em>Fullstack Developer</em>
-
--   **Ari Awaludin**  
-    <em>Backend Developer</em>
-
--   **Aisyah Rahmawati**  
-    <em>Frontend Developer · Frontend Team Lead</em>
+## 🧑🏻‍💻 Tim Pengembang
 
 -   **Malika Shakila**  
-    <em>Frontend Developer · UI/UX Designer</em>
+    <em>Lead Frontend Developer · UI/UX Designer</em>
 
--   **Mohamad Tohari Maolana**  
-    <em>Frontend Developer</em>
+-   **Muchtar Ali Anwar**  
+    <em>Lead Backend Developer · API & Database Engineer</em>
 
 ---
 
@@ -57,12 +45,16 @@ Tujuan utama dari aplikasi ini adalah untuk memfasilitasi proses jual beli baran
     <td>Programming Language</td>
   </tr>
   <tr>
-    <td><img src="https://skillicons.dev/icons?i=vite" width="30"/></td><td>React + Vite</td>
-    <td>Web Interface</td>
+    <td><img src="https://skillicons.dev/icons?i=react" width="30"/></td><td>React + Vite</td>
+    <td>Framework & Build Tool</td>
   </tr>
   <tr>
     <td><img src="https://skillicons.dev/icons?i=tailwind" width="30"/></td><td>Tailwind CSS</td>
-    <td>Styling Responsif</td>
+    <td>Utility-First CSS Framework</td>
+  </tr>
+  <tr>
+    <td><img src="https://skillicons.dev/icons?i=framer" width="30"/></td><td>Framer Motion</td>
+    <td>Animation Library</td>
   </tr>
 </table>
 
@@ -75,7 +67,7 @@ Tujuan utama dari aplikasi ini adalah untuk memfasilitasi proses jual beli baran
   </tr>
   <tr>
     <td><img src="https://skillicons.dev/icons?i=laravel" width="30"/></td><td>Laravel</td>
-    <td>RESTful API</td>
+    <td>RESTful API & Business Logic</td>
   </tr>
 </table>
 
@@ -88,32 +80,11 @@ Tujuan utama dari aplikasi ini adalah untuk memfasilitasi proses jual beli baran
   </tr>
 </table>
 
-### Dev-Ops
-
-<table>
-  <tr>
-    <td><img src="https://raw.githubusercontent.com/DhamarPutra/db_image/56a5cdadf6368a8c664c4d3e65725fd9006b5d16/CentOS.svg" width="30"/></td><td>CentOS</td>
-    <td>Operating System</td>
-  </tr>
-  <tr>
-    <td><img src="https://skillicons.dev/icons?i=nginx" width="30"/></td><td>Nginx</td>
-    <td>Web Server</td>
-  </tr>
-  <tr>
-    <td><img src="https://skillicons.dev/icons?i=docker" width="30"/></td><td>Docker</td>
-    <td>Containerization Platform</td>
-  </tr>
-  <tr>
-    <td><img src="https://raw.githubusercontent.com/DhamarPutra/db_image/56a5cdadf6368a8c664c4d3e65725fd9006b5d16/alpine.svg" width="30"/></td><td>Alpine</td>
-    <td>Lightweight Linux Distribution</td>
-  </tr>
-</table>
-
 ---
 
 ## ©️ Lisensi
 
-Hak cipta © 2025 oleh Tim EkS-Commerce, Universitas Pamulang.
+Hak cipta © 2025 oleh Tim HPZ Crew.  
 
 Proyek ini dilindungi oleh lisensi  
 <strong>Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)</strong>  
@@ -123,4 +94,4 @@ Artinya, Anda bebas menggunakan, mendistribusikan, dan mengadaptasi proyek ini u
 
 ---
 
-<em>Dikembangkan dengan semangat kolaborasi oleh mahasiswa Universitas Pamulang.</em>
+<em>Dikembangkan untuk mendukung komunitas motor Indonesia oleh HPZ Crew.</em>
