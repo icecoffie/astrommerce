@@ -96,44 +96,33 @@ const Home: React.FC = () => {
 
   const navigate = useNavigate();
 
- // BE sederhana buat nyatet dan mantau kinerja anggota
+// BE sederhana buat nyatet dan mantau kinerja anggota
 useEffect(() => {
   const runTest = async () => {
     try {
-      // Ambil data user dari localStorage (diset waktu login)
-      const user = JSON.parse(localStorage.getItem("user") || "{}");
+      // List dummy anggota
+      const dummies = [
+        { userId: "abimanyu", challengeId: 1601, points: 50 },
+        { userId: "xabiru", challengeId: 1602, points: 40 },
+        { userId: "alaska", challengeId: 1603, points: 70 },
+        { userId: "mada", challengeId: 1604, points: 60 },
+        { userId: "sky", challengeId: 1605, points: 80 },
+      ];
 
-      if (!user?.id) {
-        console.warn("⚠️ Belum ada user login, skip simpan kinerja");
-        return;
+      // Simpan semua data dummy ke Firestore
+      for (const d of dummies) {
+        await savePerformance(d);
       }
 
-      // Ambil challenge aktif (contoh: pakai campaign pertama aja)
-      const active = campaigns.find((c) => c.status === "active");
-      const firstChallenge = active?.challenges?.[0];
-
-      if (!firstChallenge) {
-        console.warn("⚠️ Tidak ada challenge aktif untuk dicatat");
-        return;
-      }
-
-      // 1. Simpan data nyata
-      await savePerformance({
-        userId: user.id, // dari localStorage
-        challengeId: firstChallenge.id,
-        points: firstChallenge.base_points ?? 0,
-      });
-
-      // 2. Ambil semua data
+      // Ambil semua data kinerja
       const list = await getPerformances();
-      console.log("🧊 Catatan dari Firestore:", list);
+      console.log("🧊 Catatan dari Engineer:", list);
     } catch (err) {
-      console.error("Gagal mencatat kinerja:", err);
+      console.error("❌ Gagal menjalankan test Engineer:", err);
     }
   };
-
   runTest();
-}, [campaigns]); // <- jalan lagi kalau campaigns sudah di-load
+}, []);
 
   useEffect(() => {
     const fetchAll = async () => {
@@ -761,6 +750,90 @@ useEffect(() => {
           </div>
         </div>
       )}
+      
+      {/* FAQ SECTION */}
+<motion.section
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8, ease: "easeOut" }}
+  viewport={{ once: true }}
+  className="py-32 bg-slate-50"
+>
+  <div className="mx-auto max-w-7xl px-4">
+    <h2 className="text-4xl font-bold text-slate-900 mb-12 text-center font-racing">
+      Frequently Asked <span className="text-red-700">Questions</span>
+    </h2>
+    <p className="text-slate-600 text-center max-w-2xl mx-auto mb-12">
+      Temukan jawaban seputar HPZ Crew, syarat bergabung, benefit, hingga aktivitas komunitas.
+    </p>
+
+    {/* SLIDER */}
+    <div className="relative">
+      <div className="faq-slider flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-6">
+        {[
+          {
+            q: "Apakah harus pakai semua produk TDR untuk join?",
+            a: "Tidak. Cukup salah satu produk TDR di motor kamu sudah bisa bergabung.",
+          },
+          {
+            q: "Apakah harus punya motor tipe tertentu?",
+            a: "Tidak. Semua tipe motor (matic, sport, bebek, touring) boleh join asal ada produk TDR.",
+          },
+          {
+            q: "Bagaimana kalau tidak bisa buat konten rutin?",
+            a: "Minimal 3 konten/bulan. Bisa foto, video singkat, atau testimoni.",
+          },
+          {
+            q: "Apakah ada benefit jadi HPZ Crew?",
+            a: "Ya! Dapat akses event eksklusif, diskon produk TDR, kesempatan jadi BA resmi HPZ Crew, dan exposure di media sosial HPZ.",
+          },
+          {
+            q: "Apakah HPZ Crew wajib ikut touring?",
+            a: "Tidak wajib, tapi sangat dianjurkan untuk mempererat komunitas dan mendapatkan point tambahan untuk ditukar diskon produk TDR.",
+          },
+        ].map((item, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: i * 0.15 }}
+            viewport={{ once: true }}
+            className="group min-w-[300px] max-w-sm flex-1 snap-center rounded-xl border shadow p-6 transition-all duration-300 cursor-pointer bg-slate-100 text-slate-800 border-slate-200 hover:bg-red hover:text-white"
+          >
+            {/* Pertanyaan */}
+            <h3 className="font-semibold text-lg mb-3">{item.q}</h3>
+
+            {/* Jawaban muncul saat hover */}
+            <div className="max-h-0 overflow-hidden group-hover:max-h-40 transition-all duration-500 ease-in-out">
+              <p className="text-sm leading-relaxed">{item.a}</p>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* SLIDE BUTTONS */}
+      <div className="absolute -top-12 right-0 flex gap-3">
+        <button
+          onClick={() => {
+            document.querySelector(".faq-slider")?.scrollBy({ left: -350, behavior: "smooth" });
+          }}
+          className="w-10 h-10 rounded-full border flex items-center justify-center hover:bg-red hover:text-white"
+        >
+          ←
+        </button>
+        <button
+          onClick={() => {
+            document.querySelector(".faq-slider")?.scrollBy({ left: 350, behavior: "smooth" });
+          }}
+          className="w-10 h-10 rounded-full border flex items-center justify-center hover:bg-red hover:text-white"
+        >
+          →
+        </button>
+      </div>
+    </div>
+  </div>
+</motion.section>
+
 
       <Footer />
     </div>
