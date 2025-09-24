@@ -96,23 +96,44 @@ const Home: React.FC = () => {
 
   const navigate = useNavigate();
 
-  // BE sederhana buat nyatet dan mantau kinerja anggota
+ // BE sederhana buat nyatet dan mantau kinerja anggota
 useEffect(() => {
   const runTest = async () => {
-    // 1. Simpan data dummy
-    await savePerformance({
-      userId: "abimanyu",
-      challengeId: 1601,
-      points: 50,
-    });
+    try {
+      // Ambil data user dari localStorage (diset waktu login)
+      const user = JSON.parse(localStorage.getItem("user") || "{}");
 
-    // 2. Ambil semua data
-    const list = await getPerformances();
-    console.log("🧊 Catatan dari Sky:", list);
+      if (!user?.id) {
+        console.warn("⚠️ Belum ada user login, skip simpan kinerja");
+        return;
+      }
+
+      // Ambil challenge aktif (contoh: pakai campaign pertama aja)
+      const active = campaigns.find((c) => c.status === "active");
+      const firstChallenge = active?.challenges?.[0];
+
+      if (!firstChallenge) {
+        console.warn("⚠️ Tidak ada challenge aktif untuk dicatat");
+        return;
+      }
+
+      // 1. Simpan data nyata
+      await savePerformance({
+        userId: user.id, // dari localStorage
+        challengeId: firstChallenge.id,
+        points: firstChallenge.base_points ?? 0,
+      });
+
+      // 2. Ambil semua data
+      const list = await getPerformances();
+      console.log("🧊 Catatan dari Firestore:", list);
+    } catch (err) {
+      console.error("Gagal mencatat kinerja:", err);
+    }
   };
 
   runTest();
-}, []);
+}, [campaigns]); // <- jalan lagi kalau campaigns sudah di-load
 
   useEffect(() => {
     const fetchAll = async () => {
