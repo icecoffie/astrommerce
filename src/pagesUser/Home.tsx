@@ -4,6 +4,7 @@ import axios from "axios";
 import Header from "./Header";
 import Footer from "./Footer";
 import { motion } from "framer-motion";
+import { savePerformance, getPerformances } from "../firebaseService";
 
 import {
   Chart as ChartJS,
@@ -95,6 +96,24 @@ const Home: React.FC = () => {
 
   const navigate = useNavigate();
 
+  // BE sederhana buat nyatet dan mantau kinerja anggota
+useEffect(() => {
+  const runTest = async () => {
+    // 1. Simpan data dummy
+    await savePerformance({
+      userId: "abimanyu",
+      challengeId: 1601,
+      points: 50,
+    });
+
+    // 2. Ambil semua data
+    const list = await getPerformances();
+    console.log("🧊 Catatan dari Sky:", list);
+  };
+
+  runTest();
+}, []);
+
   useEffect(() => {
     const fetchAll = async () => {
       try {
@@ -171,17 +190,31 @@ const Home: React.FC = () => {
     setSelectedCampaignDetail(null);
   };
 
-  const goJoin = (ch: Challenge) => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      navigate("/auth/signin", {
-        state: { redirect: `/challenge/${ch.id}/submit` },
-      });
-      return;
-    }
-    setCampaignDetailOpen(false);
-    navigate(`/challenge/${ch.id}/submit`);
-  };
+  const goJoin = async (ch: Challenge) => {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    navigate("/auth/signin", {
+      state: { redirect: `/challenge/${ch.id}/submit` },
+    });
+    return;
+  }
+
+  // Catat ke Firebase
+  const ok = await savePerformance({
+    userId: "1601", // Ganti dengan user ID sebenarnya
+    challengeId: ch.id,
+    points: ch.base_points ?? 0,
+  });
+
+  if (ok) {
+    alert("✅ Berhasil tercatat di sistem!");
+  } else {
+    alert("❌ Gagal mencatat progress.");
+  }
+
+  setCampaignDetailOpen(false);
+  navigate(`/challenge/${ch.id}/submit`);
+};
 
   return (
     <div className="overflow-hidden bg-white">
